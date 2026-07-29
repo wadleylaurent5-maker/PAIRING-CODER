@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANNED SPAM</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-container">
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="top-bar">
+            <span class="app-title">BANNED SPAM</span>
+            <span class="timer">06j 23h 53m 43s</span>
+        </div>
+        <div class="sub-title">BAN X SPAM</div>
+    </div>
+
+    <!-- Section Cible -->
+    <div class="card">
+        <div class="card-label">CIBLE</div>
+        <div class="input-group">
+            <input type="text" id="target-number" class="phone-input" placeholder="Ex: 509XXXXXXXX ou 336XXXXXXXX" />
+        </div>
+    </div>
+
+    <!-- Section Méthodes -->
+    <div class="card">
+        <div class="card-label">MÉTHODES</div>
+        <div class="checkbox-group">
+            <label class="custom-checkbox">
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+                SPAM ELITE
+            </label>
+            <label class="custom-checkbox">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                BAN DIRECT
+            </label>
+        </div>
+    </div>
+
+    <!-- Section Paramètres -->
+    <div class="card">
+        <div class="card-label">PARAMÈTRES</div>
+        <div class="input-group">
+            <input type="number" id="request-count" class="param-input" value="5" placeholder="Nombre de demandes">
+        </div>
+        <div class="card-label" style="margin-top: 10px; font-size: 12px; color: #888;">NOMBRE DEMANDE</div>
+        
+        <div class="mode-selector">
+            <div class="mode-option"><span class="dot pink"></span>Lent</div>
+            <div class="mode-option"><span class="dot pink"></span>Pro</div>
+            <div class="mode-option"><span class="dot pink"></span>Ultra</div>
+            <div class="mode-option active"><span class="dot cyan"></span>God</div>
+        </div>
+    </div>
+
+    <!-- Bouton -->
+    <button class="attack-btn" id="action-btn" onclick="launchAttack()">LANCER L'ATTAQUE 🔥</button>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <span class="status-icon">⬛</span>
+        <span class="status-text" id="status-text">ANÉANTISSEMENT EN COURS...</span>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-nav">
+        <div class="nav-item active">ACCUEIL</div>
+        <div class="nav-item">INFOS</div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+              </html>
